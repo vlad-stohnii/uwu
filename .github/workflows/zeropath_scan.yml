@@ -1,0 +1,25 @@
+name: ZeroPath AI Scan
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - main
+      
+jobs:
+  scan:
+    name: "Run ZeroPath Scan"
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    if: ${{ !contains(github.actor, '[bot]') }}
+    permissions:
+      pull-requests: write
+      security-events: write
+      statuses: write
+      contents: write
+      issues: write
+    steps:
+      - name: Run ZeroPath Scan
+        uses: zeropathai/action@main
+        with:
+          zeropath-token: ${{ secrets.ZEROPATH_API_TOKEN }}
+          pull-url: ${{ github.event.pull_request.html_url }}
