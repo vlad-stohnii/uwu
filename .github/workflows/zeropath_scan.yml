@@ -9,7 +9,7 @@ jobs:
   scan:
     name: "Run ZeroPath Scan"
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 15
     if: ${{ !contains(github.actor, '[bot]') }}
     permissions:
       pull-requests: write
