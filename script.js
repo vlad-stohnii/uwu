@@ -26,3 +26,9 @@ function loadUserData() {
     };
     xhr.send();
 }
+
+// 4. Insecure cookie handling
+function setSecureCookie() {
+    // Setting a cookie without Secure or HttpOnly flags
+    document.cookie = "user=JohnDoe; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+}
