@@ -11,7 +11,7 @@ function displayUserInput() {
 function executeUserScript() {
     var userScript = document.getElementById('userScript').value;
     // Using eval to execute user-provided script
-    eval(userScript);
+    console.warn('Execution of user-provided scripts is disabled for security reasons.');
 }
 
 // 3. Unsecured AJAX request
