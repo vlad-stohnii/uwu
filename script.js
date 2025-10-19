@@ -7,11 +7,11 @@ function displayUserInput() {
     document.getElementById('output').innerHTML = userInput;
 }
 
-// 2. Insecure use of eval
+ // 2. Insecure use of eval
 function executeUserScript() {
     var userScript = document.getElementById('userScript').value;
-    // Using eval to execute user-provided script
-    eval(userScript);
+    // Execution disabled to prevent XSS
+    console.warn('Execution of user-provided scripts is disabled for security reasons.');
 }
 
 // 3. Unsecured AJAX request
