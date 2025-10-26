@@ -4,7 +4,7 @@
 function displayUserInput() {
     var userInput = document.getElementById('userInput').value;
     // Directly inserting user input into the DOM without sanitization
-    document.getElementById('output').innerHTML = userInput;
+    document.getElementById('output').textContent = userInput;
 }
 
 // 2. Insecure use of eval
@@ -21,8 +21,14 @@ function loadUserData() {
     xhr.open('GET', 'http://example.com/userdata', true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById('ajaxOutput').innerHTML = xhr.responseText;
+            document.getElementById('ajaxOutput').textContent = xhr.responseText;
         }
     };
     xhr.send();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('submitInput').addEventListener('click', displayUserInput);
+    document.getElementById('runScript').addEventListener('click', executeUserScript);
+    document.getElementById('loadData').addEventListener('click', loadUserData);
+});
