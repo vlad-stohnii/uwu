@@ -13,19 +13,19 @@
         <div class="section">
             <h2>Cross-Site Scripting (XSS)</h2>
             <input type="text" id="userInput" placeholder="Enter some text">
-            <button onclick="displayUserInput()">Submit</button>
+            <button id="submitBtn">Submit</button>
             <div id="output"></div>
         </div>
         
         <div class="section">
             <h2>Insecure use of eval</h2>
             <textarea id="userScript" placeholder="Enter JavaScript code"></textarea>
-            <button onclick="executeUserScript()">Run Script</button>
+            <button id="runScriptBtn">Run Script</button>
         </div>
         
         <div class="section">
             <h2>Unsecured AJAX request</h2>
-            <button onclick="loadUserData()">Load User Data</button>
+            <button id="loadDataBtn">Load User Data</button>
             <div id="ajaxOutput"></div>
         </div>
     </div>
