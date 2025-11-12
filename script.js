@@ -17,11 +17,27 @@ function executeUserScript() {
 // 3. Unsecured AJAX request
 function loadUserData() {
     var xhr = new XMLHttpRequest();
-    // Using HTTP instead of HTTPS and no proper handling of CORS
-    xhr.open('GET', 'http://example.com/userdata', true);
+    // Use HTTPS and validate response origin and content to avoid mixed-origin rendering
+    xhr.open('GET', 'https://example.com/userdata', true);
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById('ajaxOutput').innerHTML = xhr.responseText;
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                try {
+                    // Ensure the actual response URL's origin matches expected origin
+                    var responseOrigin = (xhr.responseURL) ? new URL(xhr.responseURL).origin : null;
+                    if (responseOrigin !== 'https://example.com') {
+                        console.warn('Blocked response from unexpected origin:', responseOrigin);
+                        return;
+                    }
+                } catch (e) {
+                    console.warn('Origin check failed:', e);
+                    return;
+                }
+                // Use textContent to avoid interpreting response as HTML
+                document.getElementById('ajaxOutput').textContent = xhr.responseText;
+            } else {
+                console.warn('Failed to load user data, status:', xhr.status);
+            }
         }
     };
     xhr.send();
