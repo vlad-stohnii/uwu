@@ -18,10 +18,11 @@ function executeUserScript() {
 function loadUserData() {
     var xhr = new XMLHttpRequest();
     // Using HTTP instead of HTTPS and no proper handling of CORS
-    xhr.open('GET', 'http://example.com/userdata', true);
+    xhr.open('GET', 'https://example.com/userdata', true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById('ajaxOutput').innerHTML = xhr.responseText;
+            // Insert as text to prevent execution of any HTML/scripts from the response
+            document.getElementById('ajaxOutput').textContent = xhr.responseText;
         }
     };
     xhr.send();
